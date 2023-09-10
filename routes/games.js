@@ -32,6 +32,18 @@ router.get("/", async(req,res) => {
   }
 })
 
+router.get("/count", async(req,res) => {
+  try{
+    const limit = req.query.limit || 5;
+    const count = await GameModel.countDocuments({})
+    // pages: - יציג למתכנת צד לקוח כמה עמודים הוא צריך להציג סהכ
+    res.json({count,pages:Math.ceil(count/limit)})
+  }
+  catch(err){
+    console.log(err);
+    res.status(502).json({err})
+  }
+})
 
 router.post("/" , auth ,async(req,res) => {
   const validBody = validateGame(req.body)
@@ -44,19 +56,6 @@ router.post("/" , auth ,async(req,res) => {
     game.user_id = req.tokenData._id;
     await game.save()
     res.status(201).json(game);
-  }
-  catch(err){
-    console.log(err);
-    res.status(502).json({err})
-  }
-})
-
-router.get("/count", async(req, res) => {
-  try{    
-    const limit = req.query.limit || 5;
-    const count = await GameModel.countDocuments({});
-    res.json({count, pages: Math.ceil(count / limit)});
-
   }
   catch(err){
     console.log(err);

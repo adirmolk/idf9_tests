@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 
 
 const userSchema = new mongoose.Schema({
@@ -28,7 +27,7 @@ exports.createToken = (user_id) => {
   // אסור לעולם לחשוף את המילה הזאתי 
   // פרמטר שלישי - טווח זמן שבו יפוג התוקף
   // של הטוקן ולאחר מכן הוא לא יהיה שמיש
-  const token = jwt.sign({_id:user_id},process.env.JWT_SECRET,{expiresIn:"600mins"})
+  const token = jwt.sign({_id:user_id},process.env.TOKEN_SECRET,{expiresIn:"600mins"})
   return token;
 }
 

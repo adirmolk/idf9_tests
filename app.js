@@ -1,11 +1,11 @@
 // ספריית אקספרס עם כל היכולות
 const express = require("express");
-// מבצע מינפולציות על כתובות אינטרנט
+// מבצע מינפולציות על כתובות אינטרנט 
 const path = require("path");
 // ספרייה שיודעת להפעיל שרת
 const http = require("http");
 
-const { routesInit } = require("./routes/configRoutes");
+const {routesInit} = require("./routes/configRoutes")
 // התחברות למונגו
 require("./db/mongoConnect");
 
@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 // פונקציה שאחראית להגדיר את כל הרואטים שנייצר באפלקציית שרת
 routesInit(app);
+
 
 const server = http.createServer(app);
 // בודק באיזה פורט להריץ את השרת  , אם בשרת אמיתי אוסף

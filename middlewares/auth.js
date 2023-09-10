@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
+require('dotenv').config();
 
 // פונקציית מיידלוואר / אמצעית
 exports.auth = async(req,res,next) => {
@@ -11,7 +11,7 @@ exports.auth = async(req,res,next) => {
   try{
     // מנסה לפענח את הטוקן אם הוא לא בתוקף
     // או שיש טעות אחרת נעבור לקץ'
-    const decodeToken = jwt.verify(token,process.env.JWT_SECRET);
+    const decodeToken = jwt.verify(token,process.env.TOKEN_SECRET);
     // נעביר את המידע של הטוקן כמאפיין לריק
     // מכיוון שהמשתנה שלו זהה לחלוטין בזכרון לריק של הפונקציה
     // הבאה בשרשור של הראוטר
